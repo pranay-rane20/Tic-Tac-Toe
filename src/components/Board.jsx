@@ -25,7 +25,12 @@ const Board = () => {
     return null;
   };
 
+  const checkDraw = () => {
+    return state.every(square => square !== null);
+  };
+
   const winner = checkWinner();
+  const isDraw = checkDraw();
 
   const handleClick = (index) => {
     if (state[index] || winner) return;
@@ -60,9 +65,21 @@ const Board = () => {
               Play Again
             </button>
           </div>
+        ) : isDraw ? (
+          <div>
+            <h2 className="text-2xl font-bold text-white">
+              🤝 It&apos;s a Draw!
+            </h2>
+            <button
+              onClick={resetGame}
+              className="mt-4 bg-yellow-500 text-white px-6 py-2 rounded shadow hover:bg-yellow-600 transition duration-300"
+            >
+              Play Again
+            </button>
+          </div>
         ) : (
           <h3 className="text-xl font-semibold text-white">
-            Player {isXTurn ? 'X' : 'O'}'s Turn
+            Player {isXTurn ? 'X' : 'O'}&apos;s Turn
           </h3>
         )}
       </div>
